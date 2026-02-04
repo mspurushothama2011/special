@@ -64,12 +64,11 @@ export default function Login() {
                             <label className="text-sm font-medium">Username</label>
                             <Input
                                 type="text"
-                                placeholder="partner1 or partner2"
+                                placeholder="Enter your username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
-                            <p className="text-xs text-muted-foreground">Use: msp or abi</p>
                         </div>
                         <div className="space-y-2">
                             <label className="text-sm font-medium">Password</label>

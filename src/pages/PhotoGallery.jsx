@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Upload, Camera, X } from "lucide-react"
-import PhotoBoothStrip from "@/components/PhotoBoothStrip"
 
 export default function PhotoGallery() {
     const [photos, setPhotos] = useState([])
@@ -12,7 +11,6 @@ export default function PhotoGallery() {
     const [caption, setCaption] = useState('')
     const [showCamera, setShowCamera] = useState(false)
     const [selectedPhoto, setSelectedPhoto] = useState(null) // For lightbox
-    const [showPhotoBooth, setShowPhotoBooth] = useState(false)
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
     const streamRef = useRef(null)
@@ -38,16 +36,21 @@ export default function PhotoGallery() {
         if (data) setPhotos(data)
     }
 
+    useEffect(() => {
+        if (showCamera && streamRef.current && videoRef.current) {
+            videoRef.current.srcObject = streamRef.current
+        }
+    }, [showCamera])
+
     const startCamera = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { facingMode: 'user' },
                 audio: false
             })
-            if (videoRef.current) {
-                videoRef.current.srcObject = stream
-                streamRef.current = stream
-            }
+            // Store stream first
+            streamRef.current = stream
+            // Then show camera - useEffect will handle attachment
             setShowCamera(true)
         } catch (err) {
             console.error('Error accessing camera:', err)
@@ -190,8 +193,8 @@ export default function PhotoGallery() {
                         <p className="text-rose-500 flex items-center gap-1">🌸 Capture and cherish memories together ✨</p>
                     </div>
                     <div className="flex gap-2">
-                        <Button onClick={() => setShowPhotoBooth(true)}>
-                            <Camera className="mr-2 h-4 w-4" /> Photo Booth
+                        <Button onClick={startCamera} variant="secondary">
+                            <Camera className="mr-2 h-4 w-4" /> Take Photo
                         </Button>
                         <Button onClick={() => fileInputRef.current?.click()} disabled={uploading}>
                             <Upload className="mr-2 h-4 w-4" /> {uploading ? 'Uploading...' : 'Upload'}
@@ -210,7 +213,7 @@ export default function PhotoGallery() {
                 {showCamera && (
                     <Card className="animate-in slide-in-from-top-2">
                         <CardHeader className="flex flex-row items-center justify-between">
-                            <CardTitle>Photo Booth</CardTitle>
+                            <CardTitle>Take a Photo</CardTitle>
                             <Button variant="ghost" size="icon" onClick={stopCamera}>
                                 <X className="h-4 w-4" />
                             </Button>
@@ -273,8 +276,8 @@ export default function PhotoGallery() {
                                     loading="lazy"
                                 />
                                 {photo.caption && (
-                                    <div className="p-3 bg-white dark:bg-slate-900">
-                                        <p className="text-sm">{photo.caption}</p>
+                                    <div className="p-3 bg-white/95 backdrop-blur-sm border-t border-pink-100">
+                                        <p className="text-sm font-medium text-slate-800">{photo.caption}</p>
                                     </div>
                                 )}
                                 <Button
@@ -330,13 +333,6 @@ export default function PhotoGallery() {
                     </div>
                 )}
             </div>
-
-            {/* Photo Booth Strip Modal */}
-            <PhotoBoothStrip
-                isOpen={showPhotoBooth}
-                onClose={() => setShowPhotoBooth(false)}
-                onSave={fetchPhotos}
-            />
         </div>
     )
 }
