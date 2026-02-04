@@ -1,0 +1,292 @@
+.photobooth-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease-in;
+}
+
+.photobooth-modal {
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.photobooth-card {
+    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+    border: 3px solid #333;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.photobooth-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Setup Section */
+.photobooth-setup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.setup-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.setup-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+    font-family: 'Courier New', monospace;
+}
+
+.photo-count-selector {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.count-btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 0.75rem 1rem;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+
+.count-btn:hover {
+    border-color: #999;
+    transform: translateY(-2px);
+}
+
+.count-btn.active {
+    background: #333;
+    color: white;
+    border-color: #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.layout-selector,
+.filter-selector {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.layout-btn,
+.filter-btn {
+    padding: 0.6rem 1rem;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.layout-btn:hover,
+.filter-btn:hover {
+    border-color: #999;
+    transform: translateY(-1px);
+}
+
+.layout-btn.active,
+.filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.action-buttons {
+    margin-top: 1rem;
+}
+
+/* Capture Section */
+.photobooth-capture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.capture-info {
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    color: #333;
+}
+
+.countdown {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.3);
+    z-index: 10;
+    animation: countdownPulse 1s ease-in-out;
+}
+
+@keyframes countdownPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.camera-container {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid #333;
+}
+
+.camera-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.captured-preview {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mini-preview {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #666;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Preview Section */
+.photobooth-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.preview-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    color: #333;
+    text-align: center;
+}
+
+.strip-preview-container {
+    width: 100%;
+    max-width: 600px;
+    background: #f0f0f0;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 3px solid #333;
+}
+
+.strip-canvas {
+    display: none;
+}
+
+.strip-preview-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.preview-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .photobooth-modal {
+        max-width: 100%;
+    }
+
+    .photobooth-title {
+        font-size: 1.25rem;
+    }
+
+    .count-btn {
+        min-width: 50px;
+        padding: 0.6rem 0.8rem;
+        font-size: 1rem;
+    }
+
+    .layout-btn,
+    .filter-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .countdown {
+        font-size: 5rem;
+    }
+
+    .preview-actions {
+        width: 100%;
+    }
+
+    .preview-actions button {
+        flex: 1;
+        min-width: 100px;
+    }
+}
+
+.hidden {
+    display: none;
+}
