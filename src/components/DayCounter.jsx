@@ -57,7 +57,7 @@ export default function DayCounter() {
 
                 <p className="text-center text-rose-400 text-sm italic flex items-center justify-center gap-2">
                     <span className="text-lg">💑</span>
-                    Since October 18, 2024
+                    Since September 18, 2024
                     <span className="text-lg">💕</span>
                 </p>
             </CardContent>
