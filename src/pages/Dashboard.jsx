@@ -9,6 +9,7 @@ import PhotoSlideshow from "../components/PhotoSlideshow"
 import FloatingHearts from "../components/FloatingHearts"
 import LoveNotes from "../components/LoveNotes"
 import QuickStats from "../components/QuickStats"
+import BucketList from "../components/BucketList"
 import { Heart, Sparkles } from "lucide-react"
 
 export default function Dashboard() {
@@ -106,6 +107,16 @@ export default function Dashboard() {
                             <div className="absolute -top-3 -left-3 text-3xl animate-float" style={{ animationDelay: '1.2s' }}>💰</div>
                             <div className="glass-card rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-pink-300/50">
                                 <ExpenseTracker />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bucket List */}
+                    <div className="animate-fadeIn" style={{ animationDelay: '0.25s' }}>
+                        <div className="relative">
+                            <div className="absolute -top-3 -right-3 text-3xl animate-float" style={{ animationDelay: '1.4s' }}>🌟</div>
+                            <div className="glass-card rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-pink-300/50">
+                                <BucketList />
                             </div>
                         </div>
                     </div>
